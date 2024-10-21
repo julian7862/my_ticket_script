@@ -1,0 +1,42 @@
+{
+    "homepage": "https://tixcraft.com/activity/game/24_realive",
+    "browser": "chrome",
+    "language": "繁體中文",
+    "ticket_number": 2,
+    "pass_1_seat_remaining": true,
+    "auto_check_agree": true,
+    "ocr_captcha": {
+      "enable": false,
+      "auto_submit": true,
+      "force_submit": true
+    },
+    "tixcraft": {
+      "date_auto_select": {
+        "enable": true,
+        "date_keyword": "",
+        "mode": "from top to bottom"
+      },
+      "area_auto_select": {
+        "enable": true,
+        "area_keyword_1": "3400",
+        "area_keyword_2": "",
+        "area_keyword_3": "",
+        "area_keyword_4": "",
+        "mode": "from top to bottom"
+      },
+      "pass_date_is_sold_out": true,
+      "auto_reload_coming_soon_page": true,
+      "presale_code": ""
+    },
+    "advanced": {
+      "play_captcha_sound": {
+        "enable": true,
+        "filename": "ding-dong.wav"
+      },
+      "facebook_account": "",
+      "kktix_account": "",
+      "adblock_plus_enable": false
+    },
+    "debug": false
+  }
+  
