@@ -1494,7 +1494,7 @@ def evalf(x: 'Expr', prec: int, options: OPT_DICT) -> TMP_RES:
         re, im = as_real_imag()
         if re.has(re_) or im.has(im_):
             raise NotImplementedError
-        if not re:
+        if re == 0.0:
             re = None
             reprec = None
         elif re.is_number:
@@ -1502,7 +1502,7 @@ def evalf(x: 'Expr', prec: int, options: OPT_DICT) -> TMP_RES:
             reprec = prec
         else:
             raise NotImplementedError
-        if not im:
+        if im == 0.0:
             im = None
             imprec = None
         elif im.is_number:

@@ -504,16 +504,15 @@ def heurisch(f, x, rewrite=False, hints=None, mappings=None, retries=3,
         # optimizing the number of permutations of mapping              #
         assert mapping[-1][0] == x # if not, find it and correct this comment
         unnecessary_permutations = [mapping.pop(-1)]
-        # permute types of objects
+        # only permute types of objects and let the ordering
+        # of types take care of the order of replacement
         types = defaultdict(list)
         for i in mapping:
-            e, _ = i
-            types[type(e)].append(i)
+            types[type(i)].append(i)
         mapping = [types[i] for i in types]
         def _iter_mappings():
             for i in permutations(mapping):
-                # make the expression of a given type be ordered
-                yield [j for i in i for j in ordered(i)]
+                yield [j for i in i for j in i]
         mappings = _iter_mappings()
     else:
         unnecessary_permutations = unnecessary_permutations or []

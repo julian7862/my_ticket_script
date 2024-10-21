@@ -722,10 +722,7 @@ def test_creation():
     with raises(IndexError):
         Matrix((1, 2))[3] = 5
 
-    assert Matrix() == Matrix([]) == Matrix(0, 0, [])
-    assert Matrix([[]]) == Matrix(1, 0, [])
-    assert Matrix([[], []]) == Matrix(2, 0, [])
-
+    assert Matrix() == Matrix([]) == Matrix([[]]) == Matrix(0, 0, [])
     # anything used to be allowed in a matrix
     with warns_deprecated_sympy():
         assert Matrix([[[1], (2,)]]).tolist() == [[[1], (2,)]]
@@ -2737,7 +2734,7 @@ def test_from_ndarray():
         lambda: Matrix(array([[[1, 2], [3, 4]], [[5, 6], [7, 8]]])))
     assert Matrix([array([1, 2]), array([3, 4])]) == Matrix([[1, 2], [3, 4]])
     assert Matrix([array([1, 2]), [3, 4]]) == Matrix([[1, 2], [3, 4]])
-    assert Matrix([array([]), array([])]) == Matrix(2, 0, []) != Matrix(0, 0, [])
+    assert Matrix([array([]), array([])]) == Matrix([])
 
 def test_17522_numpy():
     from sympy.matrices.common import _matrixify
