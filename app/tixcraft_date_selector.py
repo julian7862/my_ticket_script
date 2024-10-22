@@ -2,6 +2,11 @@
 import random
 import time
 from selenium.webdriver.common.by import By
+import logging
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
 
 CONST_FROM_TOP_TO_BOTTOM = "from top to bottom"
 CONST_FROM_BOTTOM_TO_TOP = "from bottom to top"
@@ -94,7 +99,7 @@ def tixcraft_date_auto_select(driver, url, config_dict):
     print(button_list)            
     if button_list:
         try:
-            driver.get(button_list[0])
+            driver.get(button_list[1])
             is_coming_soon = False
         except Exception as exc:
             print("導航到訂購頁面失敗")
@@ -108,7 +113,6 @@ def tixcraft_date_auto_select(driver, url, config_dict):
             pass
     else:
         print("已經切換頁面不用 reload 了")
-    time.sleep(5)
     # time.sleep(10)
     # exit()
     # if button_list is not None:

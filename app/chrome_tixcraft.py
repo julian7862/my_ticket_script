@@ -34,7 +34,7 @@ import re
 from datetime import datetime
 # for error output
 import logging
-logging.basicConfig()
+logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger('logger')
 # for check reg_info
 import requests
@@ -116,11 +116,12 @@ def load_chromdriver_uc(webdriver_path, adblock_plus_enable):
     options.add_experimental_option("prefs", {"credentials_enable_service": False, "profile.password_manager_enabled": False})
     options.add_argument('--no-first-run')
     options.add_argument('--no-default-browser-check') 
+    # options.add_argument('--user-data-dir=/Users/julian/Library/Application Support/Google/Chrome')
+    # options.add_argument('--profile-directory=Profile 4')
 
 
     caps = options.to_capabilities()
     caps["unhandledPromptBehavior"] = u"accept"
-
     driver = None
 
     print("Use user driver path:", chromedriver_path)
@@ -255,16 +256,6 @@ def get_driver_by_config(config_dict, driver_type):
 
     
     if browser == "chrome":
-        # method 6: Selenium Stealth
-        # if driver_type != "undetected_chromedriver":
-        #     driver = load_chromdriver_normal(webdriver_path, driver_type, adblock_plus_enable)
-        # else:
-            # # method 5: uc
-            # # multiprocessing not work bug.
-            # if platform.system().lower()=="windows":
-            #     if hasattr(sys, 'frozen'):
-            #         from multiprocessing import freeze_support
-            #         freeze_support()
         driver = load_chromdriver_uc(webdriver_path, adblock_plus_enable)
     #print("try to close opened tabs.")
     '''
@@ -315,19 +306,33 @@ def tixcraft_redirect(driver, url):
     return ret
    
 def tixcraft_main(driver, url, config_dict, is_verifyCode_editing):
-    # if url == 'https://tixcraft.com/':
-    #     tixcraft_home(driver)
+    total_start_time = time.perf_counter()
+    logger.info("开始执行 tixcraft_main")
+
+    block1_start = time.perf_counter()
     if 'https://tixcraft.com/' in url:
+        logger.info("检测到在首页，调用 tixcraft_home")
+        home_start = time.perf_counter()
         tixcraft_home(driver)
+        home_end = time.perf_counter()
+    logger.info(f"tixcraft_home 执行耗时 {home_end - home_start:.4f} 秒")
+    block1_end = time.perf_counter()
+    logger.info(f"代码块1(处理首页)耗时 {block1_end - block1_start:.4f} 秒")
+
 
     if "/activity/detail/" in url:
         is_redirected = tixcraft_redirect(driver, url)
 
+
+    block2_start = time.perf_counter()
     if "/activity/game/" in url:
         date_auto_select_enable = config_dict["tixcraft"]["date_auto_select"]["enable"]
         if date_auto_select_enable:
             tixcraft_date_auto_select(driver, url, config_dict)
+    block2_end = time.perf_counter()
+    logger.info(f"代码块2(選擇日期)耗时 {block2_end - block2_start:.4f} 秒")
 
+    block3_start = time.perf_counter()
     # choose area
     if '/ticket/area/' in url:
         area_auto_select_enable = config_dict["tixcraft"]["area_auto_select"]["enable"]
@@ -335,6 +340,8 @@ def tixcraft_main(driver, url, config_dict, is_verifyCode_editing):
             # Replace the old function call
             tixcraft_area_auto_select(driver, url, config_dict)
             print("success")
+    block3_end = time.perf_counter()
+    logger.info(f"代码块3(选择区域)耗时 {block3_end - block3_start:.4f} 秒")
 
     # if '/ticket/verify/' in url:
     #     presale_code = config_dict["tixcraft"]["presale_code"]
@@ -363,9 +370,25 @@ def main():
     else:
         print("Load config error!")
 
+    # 設定停留時間 3 分鐘
+    stay_duration_minutes = 1
+    stay_duration_seconds = stay_duration_minutes * 60
+
+    # 每 30 秒發一次 log 提醒，總共持續 3 分鐘
+    interval = 30  # 每隔 30 秒
+    total_intervals = stay_duration_seconds // interval
+
+    logging.info(f"將停留 {stay_duration_minutes} 分鐘（{stay_duration_seconds} 秒）")
+
+    for i in range(total_intervals):
+        time.sleep(interval)
+        logging.info(f"已經過了 {(i + 1) * interval} 秒")
+
+    # 記錄停留結束
+    logging.info("停留時間已經結束")
+
     # internal variable. 說明：這是一個內部變數，請略過。
     url = ""
-    last_url = ""
 
     # for tixcraft
     is_verifyCode_editing = False
@@ -495,13 +518,6 @@ def main():
 
         i+=1
         print("loop:",i)
-
-        # for facebook
-        # facebook_login_url = 'https://www.facebook.com/login.php?'
-        # if url[:len(facebook_login_url)]==facebook_login_url:
-        #     facebook_account = config_dict["advanced"]["facebook_account"].strip()
-        #     if len(facebook_account) > 4:
-        #         facebook_login(driver, facebook_account)
 
 if __name__ == "__main__":
     # CONST_MODE_GUI = 0

@@ -1,5 +1,7 @@
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.common.by import By
+import time
+
 
 def tixcraft_ticket_agree(driver):
     """點選同意票券購買條款。"""
@@ -45,5 +47,9 @@ def tixcraft_ticket_main(driver, config_dict):
     if not is_ticket_number_assigned:
         ticket_number = str(config_dict["ticket_number"])
         is_ticket_number_assigned = tixcraft_ticket_number_auto_fill(driver, select_obj, ticket_number)
+
+    print("只差驗證碼")
+    # time.sleep(10)
+    # exit()
 
     return is_ticket_number_assigned
