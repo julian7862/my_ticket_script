@@ -30,6 +30,7 @@
 
    先執行 test.py 檔，來測試 chromedriver 是不是能 work
    ```bash
+   cd app
    python test.py
    ```
 
@@ -54,7 +55,6 @@
    
    切換目錄，然後執行主程式
    ```bash
-   cd app
    python chrome_tixcraft.py
 
 6. **停用虛擬環境**
