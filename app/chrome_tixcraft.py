@@ -154,7 +154,6 @@ def get_driver_by_config(config_dict, driver_type):
     homepage = None
     browser = None
     language = "English"
-    ticket_number = "2"
 
     auto_press_next_step_button = False     # default not checked.
     auto_fill_ticket_number = False         # default not checked.
