@@ -55,7 +55,7 @@
     "tixcraft": {
       "date_auto_select": {
         "enable": true,
-        "date_keyword": "",
+        "date_number": 1, //從 0 開始 代表由上往下的日期場次(所以現在 default 第二場)
         "mode": "from top to bottom"
       },
       "area_auto_select": {

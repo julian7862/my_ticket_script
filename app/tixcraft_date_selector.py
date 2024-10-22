@@ -22,7 +22,7 @@ def tixcraft_date_auto_select(driver, url, config_dict):
     show_debug_message = False  # Set to True for debugging purposes
 
     date_auto_select_mode = config_dict["tixcraft"]["date_auto_select"]["mode"]
-    date_keyword = config_dict["tixcraft"]["date_auto_select"]["date_keyword"].strip()
+    date_number = config_dict["tixcraft"]["date_auto_select"]["date_number"]
     pass_date_is_sold_out_enable = config_dict["tixcraft"]["pass_date_is_sold_out"]
     auto_reload_coming_soon_page_enable = config_dict["tixcraft"]["auto_reload_coming_soon_page"]
 
@@ -35,7 +35,7 @@ def tixcraft_date_auto_select(driver, url, config_dict):
     if show_debug_message:
         print('get date game_name:', game_name)
         print("date_auto_select_mode:", date_auto_select_mode)
-        print("date_keyword:", date_keyword)
+        print("date_number:", date_number)
 
     check_game_detail = False
     if "/activity/game/%s" % (game_name,) in url:
@@ -99,7 +99,7 @@ def tixcraft_date_auto_select(driver, url, config_dict):
     print(button_list)            
     if button_list:
         try:
-            driver.get(button_list[1])
+            driver.get(button_list[date_number])
             is_coming_soon = False
         except Exception as exc:
             print("導航到訂購頁面失敗")

@@ -168,8 +168,6 @@ def get_driver_by_config(config_dict, driver_type):
     area_keyword_3 = ""
     area_keyword_4 = ""
 
-    date_keyword = ""
-
     date_auto_select_enable = None
     date_auto_select_mode = ""
 
@@ -193,7 +191,7 @@ def get_driver_by_config(config_dict, driver_type):
     if not date_auto_select_mode in CONST_SELECT_OPTIONS_ARRAY:
         date_auto_select_mode = CONST_SELECT_ORDER_DEFAULT
 
-    date_keyword = config_dict["tixcraft"]["date_auto_select"]["date_keyword"].strip()
+    date_number = config_dict["tixcraft"]["date_auto_select"]["date_number"]
 
     area_auto_select_enable = config_dict["tixcraft"]["area_auto_select"]["enable"]
     area_auto_select_mode = config_dict["tixcraft"]["area_auto_select"]["mode"]
@@ -221,7 +219,7 @@ def get_driver_by_config(config_dict, driver_type):
     print("==[tixcraft]==")
     print("date_auto_select_enable", date_auto_select_enable)
     print("date_auto_select_mode", date_auto_select_mode)
-    print("date_keyword", date_keyword)
+    print("date_number", date_number)
     print("pass_date_is_sold_out", pass_date_is_sold_out_enable)
     print("auto_reload_coming_soon_page", auto_reload_coming_soon_page_enable)
 

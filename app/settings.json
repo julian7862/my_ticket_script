@@ -13,7 +13,7 @@
     "tixcraft": {
       "date_auto_select": {
         "enable": true,
-        "date_keyword": "",
+        "date_number": 1,
         "mode": "from top to bottom"
       },
       "area_auto_select": {
