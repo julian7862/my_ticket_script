@@ -31,14 +31,16 @@
    先執行 test.py 檔，來測試 chromedriver 是不是能 work
    ```bash
    python test.py
+   ```
 
    如果有 error 就根據自己的 chrome version 去 download chromedriver 取代原本 chromedriver
-   <"https://developer.chrome.com/docs/chromedriver/downloads?hl=zh-tw">
+   <https://developer.chrome.com/docs/chromedriver/downloads?hl=zh-tw>
 
    如果是 ssh error 就用
    ```bash
    pip install certifi
    /Applications/Python\ 3.9/Install\ Certificates.command
+   ```
 
 5. **執行程式**
    
