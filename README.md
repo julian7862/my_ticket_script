@@ -34,13 +34,17 @@
    ```
 
    > 如果有 error 就根據自己的 chrome version 去 download chromedriver 取代原本 chromedriver
+   
    - [下載連結](https://developer.chrome.com/docs/chromedriver/downloads?hl=zh-tw)
 
-   > 如果是出現 certificate 的 error :
+
+   如果是出現 certificate 的 error :
    ```bash
    urllib.error.URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1125)>
    ```
-   輸入用以下指令
+   
+   > 輸入用以下指令
+   
    ```bash
    pip install certifi
    /Applications/Python\ 3.9/Install\ Certificates.command
