@@ -403,21 +403,6 @@ def main():
 
     i = 0
     while True:
-        # time.sleep(0.1)
-
-        # is_alert_popup = False
-
-        # pass if driver not loaded.
-        # if driver is None:
-        #     print("web driver not accessible!")
-        #     break
-
-        #is_alert_popup = check_pop_alert(driver)
-
-        #MUST "do nothing: if alert popup.
-        #print("is_alert_popup:", is_alert_popup)
-        # if is_alert_popup:
-        #     continue
 
         url = ""
         try:
@@ -520,11 +505,6 @@ def main():
         print("loop:",i)
 
 if __name__ == "__main__":
-    # CONST_MODE_GUI = 0
-    # CONST_MODE_CLI = 1
-    # mode = CONST_MODE_GUI
-    #mode = CONST_MODE_CLI
-    
     main()
 
 
