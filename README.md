@@ -26,14 +26,28 @@
    ```bash
    pip install -r requirements.txt
 
-3. **執行程式**
+4. **檢查 chromedriver**
+
+   先執行 test.py 檔，來測試 chromedriver 是不是能 work
+   ```bash
+   python test.py
+
+   如果有 error 就根據自己的 chrome version 去 download chromedriver 取代原本 chromedriver
+   <"https://developer.chrome.com/docs/chromedriver/downloads?hl=zh-tw">
+
+   如果是 ssh error 就用
+   ```bash
+   pip install certifi
+   /Applications/Python\ 3.9/Install\ Certificates.command
+
+5. **執行程式**
    
    切換目錄，然後執行主程式
    ```bash
    cd app
    python chrome_tixcraft.py
 
-4. **停用虛擬環境**
+6. **停用虛擬環境**
    ```bash
    deactivate
 
