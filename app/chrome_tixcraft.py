@@ -497,7 +497,10 @@ def main():
             print("is_verifyCode_editing: ", is_verifyCode_editing)
             # print("OCR: ", ocr)
             is_verifyCode_editing = tixcraft_main(driver, url, config_dict, is_verifyCode_editing)
-
+        else:
+            homepage = config_dict["homepage"]
+            driver.get(homepage)
+            
         i+=1
         print("loop:",i)
 
