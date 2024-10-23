@@ -80,7 +80,7 @@ def tixcraft_date_auto_select(driver, url, config_dict):
                 #             if show_debug_message:
                 #                 print("match sold out text: %s, skip this row." % sold_out_item)
                 #             break
-
+                data_href = ""
                 try:
                     el = row.find_element(By.CSS_SELECTOR, 'button.btn-primary')
                     data_href = el.get_attribute('data-href')
@@ -90,7 +90,7 @@ def tixcraft_date_auto_select(driver, url, config_dict):
                     if show_debug_message:
                         print("find button.btn-primary fail")
                     el = None
-                    raise
+                    pass
                 if  data_href is not None:
                     button_list.append(data_href)
                     # if date_auto_select_mode == CONST_FROM_TOP_TO_BOTTOM:
@@ -107,14 +107,13 @@ def tixcraft_date_auto_select(driver, url, config_dict):
 
     if auto_reload_coming_soon_page_enable and is_coming_soon:
         try:
-            driver.refresh()
+            # driver.refresh()
             print("沒找到選區網頁 reload")
         except Exception as exc:
             pass
     else:
         print("已經切換頁面不用 reload 了")
-    # time.sleep(10)
-    # exit()
+
     # if button_list is not None:
     #     if len(button_list) > 0:
     #         target_row_index = 0
