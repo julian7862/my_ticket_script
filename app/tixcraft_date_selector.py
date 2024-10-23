@@ -107,7 +107,7 @@ def tixcraft_date_auto_select(driver, url, config_dict):
 
     if auto_reload_coming_soon_page_enable and is_coming_soon:
         try:
-            # driver.refresh()
+            driver.refresh()
             print("沒找到選區網頁 reload")
         except Exception as exc:
             pass
