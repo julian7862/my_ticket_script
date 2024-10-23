@@ -56,6 +56,8 @@
    切換目錄，然後執行主程式
    ```bash
    python chrome_tixcraft.py
+   ```
+   > 一開始會有一分鐘的時間不會刷新，留給手動登入 Google or Facebook 帳號
 
 6. **停用虛擬環境**
    ```bash
