@@ -41,6 +41,7 @@ import requests
 import warnings
 from urllib3.exceptions import InsecureRequestWarning
 warnings.simplefilter('ignore',InsecureRequestWarning)
+from fake_useragent import UserAgent 
 
 #import tixcraft func
 from tixcraft_date_selector import tixcraft_date_auto_select
@@ -49,6 +50,7 @@ from tixcraft_verify import tixcraft_verify
 from tixcraft_ticket import tixcraft_ticket_main
 from tixcraft_home import tixcraft_home
 from facebook_login import facebook_login
+from tixcraft_ticket_new import tixcraft_ticket_main_new
 # ocr
 import base64
 # try:
@@ -108,6 +110,10 @@ def load_chromdriver_uc(webdriver_path, adblock_plus_enable):
     options = uc.ChromeOptions()
     options.page_load_strategy="eager"
 
+    ua = UserAgent()
+    user_agent = ua.random
+    print(f"使用 user agent: {user_agent}")
+    options.add_argument(f'--user-agent={user_agent}')
     options.add_argument('--disable-features=TranslateUI')
     options.add_argument('--disable-translate')
     options.add_argument('--lang=zh-TW')
@@ -144,6 +150,14 @@ def load_chromdriver_uc(webdriver_path, adblock_plus_enable):
         #print("assign setDownloadBehavior.")
         driver.execute_cdp_cmd("Page.setDownloadBehavior", params)
     #print("driver capabilities", driver.capabilities)
+        # custom_headers = {
+        #     "Accept-Language": "zh-TW,zh;q=0.9,en-US;q=0.8,en;q=0.7",
+        #     "Referer": "https://tickmaster.com/",
+        #     "X-Requested-With": "XMLHttpRequest"
+        # }
+        #         # 使用 CDP 設定全域 header
+        # driver.execute_cdp_cmd("Network.enable", {})
+        # driver.execute_cdp_cmd("Network.setExtraHTTPHeaders", {"headers": custom_headers})
 
     return driver
 
@@ -347,7 +361,7 @@ def tixcraft_main(driver, url, config_dict, is_verifyCode_editing):
     # main app, to select ticket number.
     if '/ticket/ticket/' in url:
         if not is_verifyCode_editing:
-            is_verifyCode_editing = tixcraft_ticket_main(driver, config_dict)
+            is_verifyCode_editing = tixcraft_ticket_main_new(driver, config_dict)
     else:
         is_verifyCode_editing = False
 
@@ -369,10 +383,10 @@ def main():
 
     # 設定停留時間 3 分鐘
     stay_duration_minutes = 1
-    stay_duration_seconds = stay_duration_minutes * 60
+    stay_duration_seconds = stay_duration_minutes * 40 #原本應該乘 60
 
     # 每 30 秒發一次 log 提醒，總共持續 3 分鐘
-    interval = 30  # 每隔 30 秒
+    interval = 10  # 每隔 30 秒
     total_intervals = stay_duration_seconds // interval
 
     logging.info(f"將停留 {stay_duration_minutes} 分鐘（{stay_duration_seconds} 秒）")

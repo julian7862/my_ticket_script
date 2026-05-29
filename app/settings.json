@@ -1,8 +1,8 @@
 {
-    "homepage": "https://tixcraft.com/activity/game/24_jaychou",
+    "homepage": "https://tixcraft.com/activity/game/25_twice",
     "browser": "chrome",
     "language": "繁體中文",
-    "ticket_number": 2,
+    "ticket_number": 1,
     "pass_1_seat_remaining": true,
     "auto_check_agree": true,
     "ocr_captcha": {
@@ -18,7 +18,7 @@
       },
       "area_auto_select": {
         "enable": true,
-        "area_keyword_1": "3400",
+        "area_keyword_1": "",
         "area_keyword_2": "",
         "area_keyword_3": "",
         "area_keyword_4": "",

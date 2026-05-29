@@ -75,16 +75,26 @@ def get_tixcraft_target_area(el, area_keyword, area_auto_select_mode, pass_1_sea
 
             if row_text:
                 formatted_row_text = format_keyword_string(row_text)
-                formatted_area_keyword = format_keyword_string(area_keyword)
+                # formatted_area_keyword = format_keyword_string(area_keyword)
+
+                # formatted_area_keywords = ["4880", "3880", "3280", "2280", "1880"]
+                formatted_area_keywords = ["", "", "", "", ""]
+                
                 is_append_this_row = False
-                if formatted_area_keyword in formatted_row_text:
-                    is_append_this_row = True
+                # if formatted_area_keyword in formatted_row_text:
+                #     is_append_this_row = True
+                for keyword in formatted_area_keywords:
+                    logger.debug(f"檢查關鍵字 {keyword} 是否在區域文本中...")
+                    if keyword in formatted_row_text:
+                        logger.info(f"找到匹配的關鍵字：{keyword}")
+                        is_append_this_row = True
+                        break  # 匹配成功後立即退出
 
                 if is_append_this_row:
                     matched_blocks.append(row)
                     logger.info(f"匹配到的区域：{row_text}")
                     # if area_auto_select_mode == CONST_FROM_TOP_TO_BOTTOM:
-                    #     break
+                    break
 
         if len(matched_blocks) == 0:
             matched_blocks = None
@@ -166,6 +176,7 @@ def tixcraft_area_auto_select(driver, url, config_dict):
             
             if is_need_refresh:
                 try:
+                    time.sleep(random.uniform(0.8,1))
                     driver.refresh()
                 except Exception as exc:
                     pass

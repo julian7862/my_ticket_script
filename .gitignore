@@ -12,3 +12,9 @@ venv/
 .DS_Store
 .idea/
 .vscode/
+
+# Runtime artifacts
+app/captcha_image.png
+
+# Local ddddocr library copy
+ddddocr/
